@@ -1,0 +1,103 @@
+body {
+    background-color: aliceblue;
+}
+
+h1 {
+    font-family: cursive;
+    font-style: italic;
+    text-align: center;
+}
+
+button {
+    width: 100px;
+    background-color: cornsilk;
+    border-style: solid;
+    cursor: pointer;
+}
+
+button:active {
+    transform: translateY(2px);
+}
+
+#header {
+    display: inline;
+}
+
+#header #login{
+    float: right;
+}
+
+#searchDiv {
+    font-size: 16pt;
+}
+
+#movies {
+    margin-top: 3%;
+}
+
+.movie {
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+    height: auto;
+    width: 60%;
+    border-style: groove;
+    border-radius: 12px;
+    margin-bottom: 3%;
+    padding-left: 2%;
+    padding-bottom: 2%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+.movie:hover {
+    background-color: beige;
+}
+
+.movie:active {
+    transform: translateY(4px);
+}
+
+.movie p {
+    font-family: cursive;
+    font-size: 18pt;
+    text-align: center;
+}
+
+.movieThumb {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 180px;
+    width: 180px;
+}
+
+#rating {
+    text-align: center;
+}
+
+/*  signup.html */
+
+#signUp {
+    margin-top: 2%;
+}
+
+#signUp * {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#signUpForm * {
+    margin-bottom: 2%;
+}
+
+#signUpForm input {
+    height: 20px;
+    font-size: 16pt;
+}
+
+#signUpForm button {
+    width: 200px;
+    font-size: 16pt;
+}

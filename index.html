@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" type="text/css" href="styles/styles.css">
+    <script type="text/javascript" src="scripts/script.js" defer></script>
+    <title>Αξιολογήσεις Ταινιών</title>
+</head>
+<body>
+    <h1>Αξιολογήσεις Ταινιών</h1>
+    <div id="header">
+        <span id="login_info">
+            Παρακαλώ εγγραφείτε(sign-up) ή συνδεθείτε(sign-in) στη σελίδα
+            για επιπλέον δυνατότητες.
+        </span>
+        <form id="login">
+            <input type="text" id="username" placeholder="Username">
+                <input type = "password" id="password" placeholder="Password">
+                <button id="signInButton">Sign-in</button>
+                <a href="signup.html">Είστε νέος χρήστης;</a>
+        </form>
+    </div>
+    <hr>
+    <div id = "searchDiv">
+        <p> Επιλέξτε την/τις κατηγορία/ες ταινίας που θέλετε να αναζητήσετε: </p>
+        <form id="search">
+            <label><input type="checkbox" name="category">Any</label>
+            <label><input type="checkbox" name="category">Action</label>
+            <label><input type="checkbox" name="category">Comedy</label>
+            <label><input type="checkbox" name="category">Drama</label>
+            <label><input type="checkbox" name="category">Mystery</label>
+            <button id="searchButton">Αναζήτηση</button>
+        </form>
+    </div>
+    
+    <div id="movies">
+        <div id="movie1" class="movie">
+            <p>Mission Impossible</p>
+            <img src="images/test.jpg" class="movieThumb">
+            <p>Βαθμολογία: 4.2/5</p>
+        </div>
+    </div>
+</body>
+</html>
