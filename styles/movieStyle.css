@@ -1,0 +1,76 @@
+body {
+    background-color: azure;
+}
+
+h1 {
+    font-family: cursive;
+    font-style: italic;
+    text-align: center;
+}
+
+#header {
+    display: inline;
+}
+
+#header #login{
+    float: right;
+}
+
+#titlePhoto {
+    position: relative;
+    width: auto;
+}
+
+.movie {
+    border-style: groove;
+    border-radius: 12px;
+    margin-top: 2%;
+    padding-left: 2%;
+}
+
+#movieTitle {
+    position: relative;
+    color: coral;
+    left: 7%;
+    font-size: 20pt;
+    font-style: italic;
+    text-decoration: underline;
+}
+
+#movieThumb {
+    width: 30%;
+    height: 400px;
+    margin-bottom: 2%;
+}
+
+#metaInfo {
+    position: absolute;
+    margin-right: 5%;
+    top: 28%;
+    left: 34%;
+}
+
+.label {
+    font-size: 18pt;
+    margin-bottom: 2%;
+    text-decoration: underline;
+}
+
+#movieDescription {
+    font-size: 18px;
+    text-align: justify;
+    margin-bottom: 2%;
+}
+
+.extraInfo {
+    font-size: 18pt;
+}
+
+#movieRatingStars {
+    margin-left: 2%;
+    font-size: 18pt;
+}
+
+#movieRatingStars a::after {
+    content: "\2605";
+}
