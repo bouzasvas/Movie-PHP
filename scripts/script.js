@@ -4,6 +4,11 @@ var moviesInDiv = movies.childNodes;
 
 var anyCheckbox = checkboxes[0];
 
+var searchButton = document.getElementById("searchButton");
+
+var moviesArgs;
+var movieData;
+
 anyCheckbox.addEventListener("click", function() {
     if (anyCheckbox.checked) {
         checkboxes.forEach(function(check, i, checkboxes)
@@ -18,29 +23,76 @@ anyCheckbox.addEventListener("click", function() {
 //anyCheckbox.addEventListener("click", createMovie);
 
 function createMovie() {
-    var movieDiv = document.createElement("div");
-    movieDiv.className = "movie";
+    for (var i = 0; i < movieData.length; i++) {
+        var currentMovie = movieData[i];
 
-    var title = document.createElement("p");
-    var movieThumb = document.createElement("img");
-    var rating = document.createElement("p");
+        var movieDiv = document.createElement("div");
+        movieDiv.className = "movie";
 
-    title.innerHTML = "Mission Impossible";
+        var title = document.createElement("p");
+        var movieThumb = document.createElement("img");
+        var rating = document.createElement("p");
 
-    movieThumb.setAttribute("src", "images/test.jpg");
-    movieThumb.className = "movieThumb";
+        title.innerHTML = currentMovie[0];
 
-    rating.innerHTML = "Βαθμολογία: 4.2/5";
+        movieThumb.setAttribute("src", currentMovie[1]);
+        movieThumb.className = "movieThumb";
 
-    movieDiv.appendChild(title);
-    movieDiv.appendChild(movieThumb);
-    movieDiv.appendChild(rating);
+        rating.innerHTML = "Βαθμολογία: "+ "-" + "/5";
 
-    movies.appendChild(movieDiv);
+        movieDiv.appendChild(title);
+        movieDiv.appendChild(movieThumb);
+        movieDiv.appendChild(rating);
 
-    moviesInDiv[moviesInDiv.length-1].addEventListener("click", showMovieInfo);
+        movies.appendChild(movieDiv);
+
+        moviesInDiv[moviesInDiv.length-1].addEventListener("click", showMovieInfo);
+    }
 }
 
-function showMovieInfo() {
-    location = "movieInfo.html";
+function SearchAjaxRequest() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var returnedMovies = xhttp.responseText;
+            movies.innerHTML = "";
+            moviesArgs = new Array;
+            moviesArgs = returnedMovies.split("$");
+            moviesArgs.pop();
+
+            movieData = new Array(moviesArgs.length);
+            moviesArgs.forEach(function (movie, i, moviesArgs) {
+               movieData[i] = movie.split("#");
+            });
+            createMovie();
+        }
+    };
+    xhttp.open("POST", "searchMovieByCategory.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    var sendArgumets = "category=";
+
+    if (checkboxes[0].checked) {
+        sendArgumets+= "any-";
+    }
+    else {
+        checkboxes.forEach(function (check, i, checkboxes) {
+            if (check.checked) {
+                sendArgumets+= check.value+"-";
+            }
+        });
+    }
+    xhttp.send(sendArgumets);
+
+}
+
+searchButton.addEventListener("click", function (evt) {
+    evt.preventDefault();
+    SearchAjaxRequest();
+}, false);
+
+function showMovieInfo(evt) {
+    var target = evt.currentTarget;
+    var mov = target.childNodes[0].innerHTML;
+    window.open("movieInfo.php?mov="+mov);
 }

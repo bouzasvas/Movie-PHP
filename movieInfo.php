@@ -1,12 +1,27 @@
 <?php
-    $movieDescription = 'Η περίοδος της Γενουατοκρατίας στη Χίο διήρκεσε δύο αιώνες, από το 1346 έως την τουρκική
-                κατάληψη του νησιού το 1566. Αξίζει να σημειωθεί ότι το ενδιαφέρον των Γενουατών είχε εκδηλωθεί ήδη από το 1155
-                ενώ με τη συνθήκη του Νυμφαίου, το 1261, οι Γενουάτες έλαβαν το προνόμιο από τον Βυζαντινό αυτοκράτορα Μιχαήλ Η’
-                Παλαιολόγο (1259-1282), ως αντάλλαγμα για τη βοήθεια τους στην ανακατάληψη της Κωνσταντινούπολης, να ιδρύσουν
-                εμπορικούς σταθμούς σε διάφορες πόλεις της αυτοκρατορίας, συμπεριλαμβανομένης και της Χίου.';
-    $movieYearRelease = '2012';
-    $movieCategory = 'Δράσης, Περιπέτεια';
-    $movieRating = '4,2';
+include_once ('DB_Management.php');
+$mov = $_GET['mov'];
+
+$db = new DB_Management("localhost", "root", "");
+$db->connectToDB();
+
+$query = "select Description, ReleaseYear, Image, Category
+          from movies, categories, movie_categories 
+          where Title = \"$mov\" and movies.MovieID = movie_categories.MovieID and categories.CategoryID = movie_categories.CategoryID";
+
+$results = $db->queryToDB($query);
+
+$row = $results->fetch();
+
+$movieDescription = $row['Description'];
+$movieYearRelease = $row['ReleaseYear'];
+$movieCategory = $row['Category'];
+$movieImage = $row['Image'];
+$movieRating = "-";
+
+while ($row = $results->fetch()) {
+    $movieCategory = $movieCategory.", ".$row['Category'];
+}
 ?>
 
 
@@ -37,8 +52,10 @@
 <div id="movieInfoDiv">
     <div class="movie">
         <div id="titlePhoto">
-            <p id="movieTitle">Mission Impossible</p>
-            <img id="movieThumb" src="images/test.jpg">
+            <p id="movieTitle">
+                <?php echo "$mov"; ?>
+            </p>
+            <img id="movieThumb" src="<?php echo "$movieImage";?>">
         </div>
         <div id="metaInfo">
             <span class="label">Περιγραφή</span>
